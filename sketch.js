@@ -2,7 +2,10 @@ let rainData;
 
 function preload() {
   // 台北市即時雨量 API 位址
-  let url = 'https://wic.gov.taipei/OpenData/API/Rain/Get?stationNo=&loginId=open_rain&dataKey=85452C1D';
+  let targetUrl = 'https://wic.gov.taipei/OpenData/API/Rain/Get?stationNo=&loginId=open_rain&dataKey=85452C1D';
+  // 由於跨網域 (CORS) 限制，我們使用 allorigins 代理伺服器來讀取資料
+  // encodeURIComponent 會確保 API 網址中的特殊字元被正確處理
+  let url = 'https://api.allorigins.win/raw?url=' + encodeURIComponent(targetUrl);
   // 使用 loadJSON 取得資料
   rainData = loadJSON(url);
 }
